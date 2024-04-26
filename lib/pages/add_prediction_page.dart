@@ -574,7 +574,7 @@ class _AddPredictionPageState extends State<AddPredictionPage> {
                       double.parse(countController.text).toInt();
                   prediction.percent = doubleInRange(0.0, 100.0);
                   predictions.add(prediction);
-                  addData();
+                  addToSharedP();
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (_) => const HomePage()),
@@ -774,12 +774,12 @@ class _AddPredictionPageState extends State<AddPredictionPage> {
       Random().nextDouble() * (end - start) + start;
 }
 
-void getData(Function() callBack) async {
+void getfromSharedP(Function() callBack) async {
   final prefs = await SharedPreferences.getInstance();
 
-  final List<dynamic> jsonData1 =
+  final List<dynamic> jsonData =
       jsonDecode(prefs.getString('predictions') ?? '[]');
-  predictions = jsonData1.map<PredictionItem>((jsonList) {
+  predictions = jsonData.map<PredictionItem>((jsonList) {
     {
       return PredictionItem.fromJson(jsonList);
     }
@@ -788,7 +788,7 @@ void getData(Function() callBack) async {
   callBack();
 }
 
-Future<void> addData() async {
+Future<void> addToSharedP() async {
   final prefs = await SharedPreferences.getInstance();
   prefs.setString('predictions', jsonEncode(predictions));
 }
