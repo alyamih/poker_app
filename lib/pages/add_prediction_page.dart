@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:poker_app/model/prediction_item.dart';
 import 'package:poker_app/pages/home_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 PredictionItem prediction = PredictionItem();
 
@@ -566,12 +568,13 @@ class _AddPredictionPageState extends State<AddPredictionPage> {
                   prediction.game = selectedGame;
                   prediction.colorOfTable = selectedColor;
                   prediction.levelOfPlay = selectedLevel;
+                  prediction.number = selectedNumber;
                   prediction.sum = double.parse(sumController.text).toInt();
                   prediction.timesCount =
                       double.parse(countController.text).toInt();
                   prediction.percent = doubleInRange(0.0, 100.0);
                   predictions.add(prediction);
-
+                  addData();
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (_) => const HomePage()),
@@ -769,4 +772,23 @@ class _AddPredictionPageState extends State<AddPredictionPage> {
 
   double doubleInRange(num start, num end) =>
       Random().nextDouble() * (end - start) + start;
+}
+
+void getData(Function() callBack) async {
+  final prefs = await SharedPreferences.getInstance();
+
+  final List<dynamic> jsonData1 =
+      jsonDecode(prefs.getString('predictions') ?? '[]');
+  predictions = jsonData1.map<PredictionItem>((jsonList) {
+    {
+      return PredictionItem.fromJson(jsonList);
+    }
+  }).toList();
+
+  callBack();
+}
+
+Future<void> addData() async {
+  final prefs = await SharedPreferences.getInstance();
+  prefs.setString('predictions', jsonEncode(predictions));
 }

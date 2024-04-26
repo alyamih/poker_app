@@ -90,7 +90,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
             ),
           if (page.value == 1)
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 43, 16, 86),
+              padding: const EdgeInsets.fromLTRB(16, 43, 16, 83),
               child: Image.asset('assets/onBoarding2.png'),
             ),
           if (page.value == 1)

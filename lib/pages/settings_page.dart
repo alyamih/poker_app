@@ -13,16 +13,9 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  TextEditingController textControllerUserName = TextEditingController();
-  TextEditingController textControllerEmail = TextEditingController();
   @override
   void initState() {
     super.initState();
-    // getData(
-    //   () {
-    //     setState(() {});
-    //   },
-    // );
   }
 
   @override
@@ -196,42 +189,3 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 }
-
-// void getData(Function() callBack) async {
-//   final prefs = await SharedPreferences.getInstance();
-//   if (prefs.getString('user') != null) {
-//     Map<String, dynamic> userMap = jsonDecode(prefs.getString('user')!);
-//     user = UserItem.fromJson(userMap);
-//   }
-//   final List<dynamic> jsonData1 =
-//       jsonDecode(prefs.getString('incomes') ?? '[]');
-//   final List<dynamic> jsonData2 =
-//       jsonDecode(prefs.getString('expenses') ?? '[]');
-//   final List<dynamic> jsonData3 =
-//       jsonDecode(prefs.getString('results') ?? '[]');
-//   incomes = jsonData1.map<IncomeItem>((jsonList) {
-//     {
-//       return IncomeItem.fromJson(jsonList);
-//     }
-//   }).toList();
-//   expenses = jsonData2.map<ExpenseItem>((jsonList) {
-//     {
-//       return ExpenseItem.fromJson(jsonList);
-//     }
-//   }).toList();
-//   results = jsonData3.map<ResultItem>((jsonList) {
-//     {
-//       return ResultItem.fromJson(jsonList);
-//     }
-//   }).toList();
-
-//   callBack();
-// }
-
-// Future<void> addData() async {
-//   final prefs = await SharedPreferences.getInstance();
-//   prefs.setString('incomes', jsonEncode(incomes));
-//   prefs.setString('expenses', jsonEncode(expenses));
-//   prefs.setString('results', jsonEncode(results));
-//   prefs.setString('user', jsonEncode(user));
-// }
